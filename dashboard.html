@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Koruxa Optimizer</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0b1020; --panel:#131b2e; --line:#26334c; --muted:#9aa9c2; --text:#edf3ff; --gold:#f6c85f; --green:#63d6a3; --red:#ff8282; --blue:#91baff; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:radial-gradient(ellipse at top,#172542 0,#0b1020 50rem); color:var(--text); font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    main { max-width:1440px; margin:auto; padding:34px 24px 56px; }
+    header { display:flex; align-items:flex-start; justify-content:space-between; gap:24px; margin-bottom:26px; }
+    h1 { font-size:clamp(27px,4vw,38px); letter-spacing:-.04em; margin:0 0 7px; }
+    .sub,.muted { color:var(--muted); }
+    .load { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    button,.file-label,select,input[type=search] { border:1px solid var(--line); border-radius:10px; background:#111a2d; color:var(--text); padding:10px 13px; font:inherit; }
+    button,.file-label { cursor:pointer; font-weight:650; }
+    button:hover,.file-label:hover { border-color:#6685bb; background:#182642; }
+    input[type=file] { display:none; }
+    .status { min-height:22px; color:var(--muted); font-size:13px; margin-top:8px; text-align:right; }
+    .empty { border:1px dashed #405171; border-radius:16px; padding:48px 20px; text-align:center; color:var(--muted); background:#10182a9c; }
+    .empty strong { display:block; color:var(--text); font-size:19px; margin-bottom:8px; }
+    #app[hidden],#empty[hidden] { display:none; }
+    .cards { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:13px; margin:20px 0; }
+    .card,.panel { background:#121a2bde; border:1px solid var(--line); border-radius:15px; }
+    .card { padding:17px 18px; min-height:98px; }
+    .card label { display:block; color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px; }
+    .card strong { font-size:22px; letter-spacing:-.02em; }
+    .toolbar { display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; padding:15px; border-bottom:1px solid var(--line); }
+    .tabs { display:flex; gap:7px; flex-wrap:wrap; }
+    .tabs button { padding:8px 13px; color:var(--muted); }
+    .tabs button.active { color:var(--gold); border-color:#79652e; background:#322a17; }
+    .filters { display:flex; gap:8px; flex-wrap:wrap; }
+    .filters input[type=search] { min-width:210px; }
+    .panel { overflow:hidden; }
+    .table-wrap { overflow:auto; max-height:calc(100vh - 410px); min-height:300px; }
+    table { width:100%; border-collapse:collapse; white-space:nowrap; }
+    th { position:sticky; top:0; z-index:1; background:#182238; color:#b5c2d8; text-align:right; font-size:11px; text-transform:uppercase; letter-spacing:.07em; }
+    th:first-child,td:first-child,th:nth-child(2),td:nth-child(2),th:nth-child(6),td:nth-child(6) { text-align:left; }
+    th,td { padding:12px 14px; border-bottom:1px solid #202b40; }
+    td { text-align:right; font-variant-numeric:tabular-nums; }
+    tr:hover td { background:#18243a; }
+    .task { font-weight:700; color:var(--text); }
+    .skill { text-transform:capitalize; color:var(--blue); }
+    .positive { color:var(--green); }
+    .negative { color:var(--red); }
+    .pill { display:inline-block; border:1px solid var(--line); border-radius:999px; padding:3px 9px; font-size:12px; color:#c3cee0; }
+    .pill.ready { color:var(--green); border-color:#28624d; }
+    .pill.warn { color:var(--gold); border-color:#695728; }
+    .detail { display:block; color:var(--muted); font-size:11px; margin-top:3px; }
+    .source-label { display:inline-block; max-width:120px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; vertical-align:bottom; text-align:left; }
+    .foot { padding:12px 15px; color:var(--muted); font-size:12px; }
+    .food-note { margin:12px 1px 0; color:var(--muted); font-size:12px; }
+    .run-panel { padding:18px; margin-bottom:18px; }
+    .run-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:14px; }
+    .run-heading strong { display:block; font-size:16px; margin-bottom:3px; }
+    .run-form { display:grid; grid-template-columns:repeat(4,minmax(150px,1fr)); gap:10px; align-items:end; }
+    .run-form label { display:block; font-size:12px; color:var(--muted); }
+    .run-form input:not([type=checkbox]) { width:100%; margin-top:5px; }
+    .run-actions { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    .refresh-option { display:flex!important; align-items:center; gap:7px; }
+    .run-status { margin-top:12px; color:var(--muted); font-size:13px; white-space:pre-wrap; }
+    .run-output { display:none; max-height:180px; overflow:auto; margin-top:8px; padding:10px; border-radius:9px; background:#080d18; color:#c2d0e5; font:12px/1.45 ui-monospace,Consolas,monospace; white-space:pre-wrap; }
+    .run-output.visible { display:block; }
+    @media(max-width:850px) { header { display:block; } .load { margin-top:16px; } .status { text-align:left; } .cards { grid-template-columns:repeat(2,minmax(0,1fr)); } .table-wrap { max-height:none; } }
+    @media(max-width:850px) { .run-form { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media(max-width:480px) { main { padding:22px 13px 40px; } .cards { grid-template-columns:1fr 1fr; gap:8px; } .card { padding:13px; } .card strong { font-size:18px; } .filters input[type=search] { min-width:150px; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div>
+      <h1>Koruxa Optimizer</h1>
+      <div class="sub">Compare estimated gold and XP rates, then check whether each task is practical with your current materials.</div>
+    </div>
+    <div>
+      <div class="load">
+        <label class="file-label" for="report-file">Open optimizer report</label>
+        <input id="report-file" type="file" accept="application/json,.json">
+      </div>
+      <div id="status" class="status">Start the local dashboard to run the optimizer here.</div>
+    </div>
+  </header>
+
+  <section class="panel run-panel">
+    <div class="run-heading">
+      <div><strong>Run optimizer</strong><span class="muted">Your login is sent only to the local optimizer process and is not saved.</span></div>
+    </div>
+    <form id="run-form" class="run-form">
+      <label>Koruxa username<input id="koruxa-username" name="username" autocomplete="username" required></label>
+      <label>Koruxa password<input id="koruxa-password" name="password" type="password" autocomplete="current-password" required></label>
+      <label>Character ID<input id="character-id" name="character_id" inputmode="numeric" placeholder="Enter your character ID" required></label>
+      <div class="run-actions">
+        <button id="run-button" type="submit">Run optimizer</button>
+        <label class="refresh-option"><input id="refresh-market" type="checkbox"> Refresh market data</label>
+      </div>
+    </form>
+    <div id="run-status" class="run-status" role="status"></div>
+    <pre id="run-output" class="run-output"></pre>
+  </section>
+
+  <section id="empty" class="empty">
+    <strong>Load a report to get started</strong>
+    Start <code>start_optimizer.bat</code> and run the optimizer above, or open an existing JSON report.
+  </section>
+
+  <section id="app" hidden>
+    <div class="cards">
+      <div class="card"><label>Top net gold estimate</label><strong id="top-gold">—</strong><span id="top-gold-name" class="detail"></span></div>
+      <div class="card"><label>Top XP estimate</label><strong id="top-xp">—</strong><span id="top-xp-name" class="detail"></span></div>
+      <div class="card"><label>Market snapshot</label><strong id="snapshot-age">—</strong><span id="snapshot-time" class="detail"></span></div>
+      <div class="card"><label>Price conflicts</label><strong id="conflict-count">—</strong><span class="detail">Estimates excluded from actionable gold ranking</span></div>
+    </div>
+    <div class="panel">
+      <div class="toolbar">
+        <div class="tabs" role="tablist" aria-label="Rankings">
+          <button class="active" data-view="gold" role="tab">Net Gold / hour</button>
+          <button data-view="xp" role="tab">XP / hour</button>
+          <button data-view="conflicts" role="tab">Price conflicts</button>
+          <button data-view="cooked_fish" role="tab">Cooked fish</button>
+          <button data-view="production_value" role="tab">Self-sourced production</button>
+          <button data-view="transmuting" role="tab">Transmuting</button>
+        </div>
+        <div class="filters" id="filters">
+          <input id="search" type="search" placeholder="Search tasks or materials" aria-label="Search tasks or materials">
+          <select id="skill-filter" aria-label="Filter by skill"><option value="">All skills</option></select>
+          <select id="feasibility-filter" aria-label="Filter by feasibility">
+            <option value="">All feasibility</option><option value="ready">Ready now</option><option value="needed">Needs materials</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr id="table-head"></tr></thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+      <div id="table-foot" class="foot"></div>
+    </div>
+    <p id="food-note" class="food-note"></p>
+  </section>
+</main>
+<script>
+  const byId = id => document.getElementById(id);
+  const state = { report:null, view:"gold" };
+  const number = (value, digits=0) => value == null || !Number.isFinite(Number(value)) ? "—" : Number(value).toLocaleString(undefined,{maximumFractionDigits:digits});
+  const gp = value => value == null ? "—" : `${number(value)} GP`;
+  const pct = value => value == null ? "—" : `${number(value,1)}%`;
+  const safe = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+  const skillsOf = rows => [...new Set(rows.map(row=>row.skill).filter(Boolean))].sort();
+  const combatXpAllocation = r => {
+    if(r.combat_xp_hitpoints_hour==null) return "—";
+    let parts=r.skill==="melee"
+      ? [`Attack ${number(r.combat_xp_attack_hour)}`,`Strength ${number(r.combat_xp_strength_hour)}`,`Defence ${number(r.combat_xp_defence_hour)}`,`HP ${number(r.combat_xp_hitpoints_hour)}`]
+      : [`${safe((r.skill||"Combat").replace(/^./,c=>c.toUpperCase()))} ${number(r.combat_xp_style_hour)}`,`HP ${number(r.combat_xp_hitpoints_hour)}`];
+    if(Number(r.combat_augment_dot_expected_per_attack)>0) parts.push(`DoT +${number(r.combat_augment_dot_expected_per_attack,1)} expected damage/attack (all ticks; cap is per tick)`);
+    if(Number(r.combat_augment_damage_pct)>0) parts.push(`Slayer's Edge +${number(r.combat_augment_damage_pct,1)}%`);
+    if(r.combat_augment_special_key) parts.push(`Spec ${safe(r.combat_augment_special_key)} ×${number(r.combat_augment_special_multiplier,2)}/use${r.combat_augment_execute_finisher_multiplier?` (×${number(r.combat_augment_execute_finisher_multiplier,2)} below 30% HP)`:""}`);
+    return parts.join(" · ");
+  };
+
+  byId("report-file").addEventListener("change", async event => {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    try {
+      const report = JSON.parse(await file.text());
+      setReport(report, file.name);
+    } catch (error) {
+      byId("status").textContent = `Could not load report: ${error.message}`;
+    }
+  });
+  byId("run-form").addEventListener("submit", async event => {
+    event.preventDefault();
+    const button=byId("run-button"), status=byId("run-status");
+    const credentials={username:byId("koruxa-username").value.trim(),password:byId("koruxa-password").value,
+      character_id:byId("character-id").value.trim(),refresh_market:byId("refresh-market").checked};
+    button.disabled=true;
+    status.textContent="Starting optimizer…";
+    byId("run-output").classList.add("visible");
+    byId("run-output").textContent="";
+    try {
+      const response=await fetch("/api/run",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(credentials)});
+      byId("koruxa-password").value="";
+      const result=await response.json();
+      if(!response.ok) throw new Error(result.error||`Request failed (${response.status})`);
+      status.textContent="Optimizer is running. This may take a few minutes, especially when refreshing market data.";
+      pollRun();
+    } catch(error) {
+      byId("koruxa-password").value="";
+      button.disabled=false;
+      status.textContent=`Could not start: ${error.message}. Launch start_optimizer.bat and use the dashboard it opens.`;
+    }
+  });
+  document.querySelectorAll("[data-view]").forEach(button => button.addEventListener("click", () => {
+    state.view = button.dataset.view;
+    document.querySelectorAll("[data-view]").forEach(tab => tab.classList.toggle("active",tab===button));
+    byId("filters").hidden = state.view === "conflicts";
+    renderTable();
+  }));
+  ["search","skill-filter","feasibility-filter"].forEach(id=>byId(id).addEventListener("input",renderTable));
+  ["skill-filter","feasibility-filter"].forEach(id=>byId(id).addEventListener("change",renderTable));
+
+  function setReport(report, source) {
+    if (report.schema_version !== 1 || !report.rankings) throw new Error("Unsupported optimizer report format.");
+    state.report=report;
+    byId("empty").hidden=true;
+    byId("app").hidden=false;
+    byId("status").textContent=`Loaded ${source} · generated ${new Date(report.generated_at).toLocaleString()}`;
+    renderSummary(); fillSkills(); renderTable();
+  }
+  async function pollRun() {
+    try {
+      const response=await fetch("/api/status",{cache:"no-store"}), job=await response.json();
+      byId("run-output").textContent=job.output||"";
+      byId("run-output").scrollTop=byId("run-output").scrollHeight;
+      if(job.running) { byId("run-status").textContent="Optimizer is running…"; setTimeout(pollRun,1200); return; }
+      byId("run-button").disabled=false;
+      if(job.state==="complete") {
+        const reportResponse=await fetch("/api/report",{cache:"no-store"});
+        if(!reportResponse.ok) throw new Error("The run finished, but no report was produced.");
+        setReport(await reportResponse.json(),"latest optimizer run");
+        byId("run-status").textContent="Finished successfully. The report is up to date.";
+      } else if(job.state==="failed") {
+        byId("run-status").textContent=`Optimizer exited with code ${job.returncode}. Review the output above.`;
+      }
+    } catch(error) {
+      byId("run-button").disabled=false;
+      byId("run-status").textContent=`Local optimizer service is unavailable: ${error.message}`;
+    }
+  }
+  async function connectLocalService() {
+    try {
+      const statusResponse=await fetch("/api/status",{cache:"no-store"});
+      if(!statusResponse.ok) throw new Error("Local service not ready");
+      const job=await statusResponse.json();
+      if(job.running) { byId("run-button").disabled=true; byId("run-status").textContent="An optimizer run is in progress…"; pollRun(); }
+      const reportResponse=await fetch("/api/report",{cache:"no-store"});
+      if(reportResponse.ok) setReport(await reportResponse.json(),"latest optimizer run");
+    } catch(_) {
+      byId("run-status").textContent="Launch start_optimizer.bat to enable one-click runs. Existing JSON reports can still be opened above.";
+    }
+  }
+  connectLocalService();
+
+  function renderSummary() {
+    const report=state.report, gold=report.rankings.gold_per_hour||[], xp=report.rankings.xp_per_hour||[];
+    byId("top-gold").textContent=gold.length?gp(gold[0].profit_hour):"—";
+    byId("top-gold-name").textContent=gold.length?`${gold[0].label} · ${gold[0].skill}`:"No ranked tasks";
+    byId("top-xp").textContent=xp.length?`${number(xp[0].xp_hour)} XP/hr`:"—";
+    byId("top-xp-name").textContent=xp.length?`${xp[0].label} · ${xp[0].skill}`:"No ranked tasks";
+    const age=report.market_snapshot_age_hours;
+    byId("snapshot-age").textContent=age==null?"Unknown":`${number(age,1)} hours old`;
+    byId("snapshot-time").textContent=age>24?"Refresh before relying on market prices":"Market data age at calculation";
+    const conflicts=report.price_conflicts||[];
+    byId("conflict-count").textContent=number(conflicts.length);
+    const food=report.thieving_food_cost_basis;
+    const foodText=food?`Food replacement estimate uses ${food.name}: ${gp(food.price)} for ${number(food.heal)} HP (${number(food.cost_per_hp,2)} GP/HP; ${food.price_source}). Damage mitigation is not included.`:"Food price unavailable; food replacement cost is not estimated.";
+    const combat=[...gold,...xp].find(row=>row.combat_assumptions);
+    byId("food-note").textContent=foodText+(combat?` Combat rates are estimates: ${combat.combat_assumptions}.`:
+      "");
+  }
+  function fillSkills() {
+    const all=[...(state.report.rankings.gold_per_hour||[]),...(state.report.rankings.xp_per_hour||[])];
+    const select=byId("skill-filter"), chosen=select.value;
+    select.innerHTML='<option value="">All skills</option>'+skillsOf(all).map(skill=>`<option value="${safe(skill)}">${safe(skill)}</option>`).join("");
+    select.value=chosen;
+  }
+  function rowsForView() {
+    const report=state.report;
+    if(state.view==="conflicts") return report.price_conflicts||[];
+    if(["cooked_fish","production_value","transmuting"].includes(state.view)) return (report.special_rankings||{})[state.view]||[];
+    return report.rankings[state.view==="xp"?"xp_per_hour":"gold_per_hour"]||[];
+  }
+  function knownAcquisition(row) {
+    if(row.known_acquisition_seconds==null) return "Unknown";
+    const missing=row.unresolved_inputs||[];
+    const total=`${number(row.known_acquisition_seconds,1)}s`;
+    return missing.length?`${total} known; missing ${safe(missing.join(", "))}`:total;
+  }
+  function shortSource(value) {
+    const source=String(value||"Unknown");
+    if(source.startsWith("Market estimate +")) return "Market + drops";
+    if(source.startsWith("Stale market +")) return "Stale + drops";
+    return ({"Live market":"Market","Stale market":"Stale market","NPC/partial":"NPC / partial",
+      "Thieving range":"Thieving","Thieving coins":"Thieving","Wiki + volume":"Wiki volume",
+      "Wiki estimate":"Wiki","Wiki XP only":"Wiki XP"})[source]||source;
+  }
+  function renderTable() {
+    if(!state.report)return;
+    const conflict=state.view==="conflicts", xp=state.view==="xp";
+    const custom=!["gold","xp","conflicts"].includes(state.view);
+    byId("food-note").hidden=custom||conflict;
+    const fields=state.view==="cooked_fish"?[["Cooked fish",r=>safe(r.label)],["Healing",r=>`${number(r.healing_hp)} HP`],["Healing/hr incl. catch + cook",r=>`${number(r.healing_per_hour)} HP/hr`],["Burn chance",r=>pct(r.burn_chance_pct)],["Catch time",r=>`${number(r.catch_seconds,1)}s`],["Cook time",r=>`${number(r.cook_seconds,1)}s`]]:
+      state.view==="transmuting"?[["Item",r=>safe(r.label)],["GP per cast",r=>gp(r.gold_per_cast)],["NPC base",r=>gp(r.npc_price)],["Magic level bonus",r=>pct(r.magic_level_bonus_pct)],["Golden Touch",r=>pct(r.golden_touch_bonus_pct)],["GP/hr incl. full acquisition + cast",r=>r.gold_per_hour==null?"Unknown":gp(r.gold_per_hour)],["Known acquisition chain",knownAcquisition],["Transmute cast",r=>`${number(r.cast_seconds,1)}s`],["Required level gates",r=>(r.unlock_requirements||[]).length?safe(r.unlock_requirements.join(", ")):"Available"],["Inputs per cast",r=>safe(r.materials)]]:
+      state.view==="production_value"?[["Output",r=>safe(r.label)],["Skill",r=>safe(r.skill)],["Output value",r=>gp(r.gold_value)],["Self-sourced GP/hr",r=>r.gold_per_hour==null?"Unknown":gp(r.gold_per_hour)],["Total chain time",r=>r.total_seconds==null?"Unknown":`${number(r.total_seconds,1)}s`],["Final process time",r=>`${number(r.process_seconds,1)}s`],["Materials / chain",r=>safe(r.materials)]]:
+      conflict?[["Task",r=>safe(r.label)],["Skill",r=>safe(r.skill)],["Wiki GP/hr",r=>gp(r.unverified_wiki_profit_hour)],["Wiki / ask",r=>r.price_gap_ratio==null?"—":`${number(r.price_gap_ratio,1)}×`],["Market share",r=>pct(r.market_share_required_pct)],["Source",r=>`<span class="source-label" title="${safe(r.valuation_source||"Unknown")}">${safe(shortSource(r.valuation_source))}</span>`]]:
+      xp?[["Task",r=>`<span class="task" title="${safe(r.combat_context_warning||"")}">${safe(r.label)}</span><span class="detail">${safe(r.category||"")}</span>`],["Skill",r=>safe((r.skill||"—").replace(/^./,c=>c.toUpperCase()))],["Total XP/hr",r=>`${number(r.xp_hour)} XP`],["XP allocation",combatXpAllocation],["Combat style",r=>safe(r.combat_style||"—")],["Kills/hr",r=>r.kill_rate_per_hour==null?"—":number(r.kill_rate_per_hour,1)],["Kill cycle",r=>r.combat_kill_cycle_seconds==null?"—":`${number(r.combat_kill_cycle_seconds,1)}s (${number(r.combat_respawn_seconds,1)}s respawn)`]]:
+      [["Task",r=>`<span class="task">${safe(r.label)}</span><span class="detail">${safe(r.category||"")}</span>`],["Skill",r=>safe((r.skill||"—").replace(/^./,c=>c.toUpperCase()))],["Net Gold/hr ongoing",r=>gp(r.profit_hour)],["Net Gold/hr from stock",r=>gp(r.stockpile_profit_hour)],["Stockpile hours",r=>r.stockpile_hours==null?"—":`${number(r.stockpile_hours,1)} h`],["Feasibility",r=>`<span class="pill ${r.feasibility==="Ready now"?"ready":"warn"}">${safe(r.feasibility||"Unknown")}</span>`],["Source",r=>`<span class="source-label" title="${safe(r.valuation_source||"Unknown")}">${safe(shortSource(r.valuation_source))}</span>`]];
+    byId("table-head").innerHTML=fields.map(([label])=>`<th>${label}</th>`).join("");
+    let rows=rowsForView();
+    if(!conflict){
+      const query=byId("search").value.trim().toLowerCase(), skill=byId("skill-filter").value, feasible=byId("feasibility-filter").value;
+      rows=rows.filter(row=>!skill||row.skill===skill)
+        .filter(row=>custom||(!feasible|| (feasible==="ready"?row.feasibility==="Ready now":row.feasibility&&row.feasibility!=="Ready now")))
+        .filter(row=>!query||`${row.label} ${row.skill} ${row.feasibility} ${row.materials||""} ${(row.missing_materials||[]).map(m=>m.name).join(" ")}`.toLowerCase().includes(query));
+    }
+    byId("table-body").innerHTML=rows.map(row=>`<tr>${fields.map(([,render])=>`<td>${render(row)}</td>`).join("")}</tr>`).join("")||`<tr><td colspan="${fields.length}" class="muted">No tasks match these filters.</td></tr>`;
+    const footnotes={
+      cooked_fish:`Healing efficiency includes fishing and cooking time; burn chance uses the saved recipe values and Cooking level.`,
+      transmuting:`GP/cast uses the live Magic and Golden Touch bonuses. Acquisition time includes modeled item and rune gathering/production; unresolved inputs are named in the row. Wiki shop-value brackets determine inferred rune tiers.`,
+      production_value:`Self-sourced GP/hr divides the output value by the full modeled gathering and production chain. It assumes materials are gathered or crafted rather than purchased; the output value uses Wiki market price, then NPC value.`,
+      xp:`Combat Total XP/hr includes style XP and Hitpoints XP. Allocation breaks out the modeled skills and HP. Passive augment damage-over-time is included; special multipliers are shown per use, but their charge rate is unavailable.`,
+      conflicts:`These Wiki estimates were excluded from the actionable gold ranking because their prices conflict with current market asks.`,
+      gold:`Ongoing gold rate includes recurring material costs; from-stock rate uses current materials. Stockpile hours estimate when those materials run out. Hover the shortened Source label for its full detail.`
+    };
+    byId("table-foot").textContent=footnotes[state.view]||"";
+  }
+</script>
+</body>
+</html>

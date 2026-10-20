@@ -1,0 +1,2326 @@
+{
+  "skill": "thieving",
+  "source": {
+    "file": "skill_thieving.json",
+    "action_count": 16
+  },
+  "normalization_notes": [
+    "Dynamic calc data is intentionally excluded.",
+    "Success, stun, and damage probabilities are preserved without assuming their interaction.",
+    "Loot drop probabilities are preserved as decimal probabilities.",
+    "Cross-skill loot requirements are preserved.",
+    "Coin rewards are preserved separately from item loot.",
+    "Rare drops are preserved separately from ordinary loot."
+  ],
+  "activities": [
+    {
+      "skill": "thieving",
+      "activity_type": "queued",
+      "key": "farmer",
+      "level": 1,
+      "action": "Farmer",
+      "base_time_seconds": 6.0,
+      "xp": 10,
+      "coin_reward": {
+        "min": 3,
+        "max": 10
+      },
+      "success_rate": 0.8,
+      "outputs": [],
+      "loot_drops": [
+        {
+          "item_key": "dustite_ore",
+          "quantity_min": 1,
+          "quantity_max": 3,
+          "drop_chance": 0.15,
+          "requirements": null
+        },
+        {
+          "item_key": "ashes",
+          "quantity_min": 1,
+          "quantity_max": 3,
+          "drop_chance": 0.08,
+          "requirements": null
+        },
+        {
+          "item_key": "aetherite_rune",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.05,
+          "requirements": null
+        },
+        {
+          "item_key": "basic_compost",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.02,
+          "requirements": null
+        },
+        {
+          "item_key": "glowroot_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "dustwheat_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "thieving_gloves",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 1e-05,
+          "requirements": null
+        }
+      ],
+      "rare_drops": [
+        {
+          "item_key": "dustite_lockpick_star",
+          "chance": 1e-05
+        },
+        {
+          "item_key": "dustite_lockpick_moon",
+          "chance": 4e-06
+        },
+        {
+          "item_key": "dustite_lockpick_sun",
+          "chance": 2.5e-06
+        }
+      ],
+      "failure_mechanics": {
+        "stun": {
+          "chance": 0.4,
+          "duration_seconds": 5
+        },
+        "damage": {
+          "chance": 0.3,
+          "min": 30,
+          "max": 80
+        }
+      }
+    },
+    {
+      "skill": "thieving",
+      "activity_type": "queued",
+      "key": "market_stall",
+      "level": 10,
+      "action": "Market Stall",
+      "base_time_seconds": 8.0,
+      "xp": 20,
+      "coin_reward": {
+        "min": 10,
+        "max": 20
+      },
+      "success_rate": 0.75,
+      "outputs": [],
+      "loot_drops": [
+        {
+          "item_key": "velorite_ore",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.12,
+          "requirements": null
+        },
+        {
+          "item_key": "dustite_arrow",
+          "quantity_min": 5,
+          "quantity_max": 15,
+          "drop_chance": 0.1,
+          "requirements": null
+        },
+        {
+          "item_key": "dustite_bar",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.08,
+          "requirements": null
+        },
+        {
+          "item_key": "fine_ashes",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.06,
+          "requirements": null
+        },
+        {
+          "item_key": "fluxite_rune",
+          "quantity_min": 1,
+          "quantity_max": 3,
+          "drop_chance": 0.05,
+          "requirements": null
+        },
+        {
+          "item_key": "voidstone_rune",
+          "quantity_min": 1,
+          "quantity_max": 3,
+          "drop_chance": 0.05,
+          "requirements": null
+        },
+        {
+          "item_key": "basic_compost",
+          "quantity_min": 1,
+          "quantity_max": 3,
+          "drop_chance": 0.02,
+          "requirements": null
+        },
+        {
+          "item_key": "emberstem_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "crimson_corn_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "enriched_compost",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "glowroot_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.008,
+          "requirements": null
+        },
+        {
+          "item_key": "dustwheat_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.008,
+          "requirements": null
+        },
+        {
+          "item_key": "thieving_gloves",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 2e-05,
+          "requirements": null
+        }
+      ],
+      "rare_drops": [
+        {
+          "item_key": "copite_lockpick_star",
+          "chance": 1e-05
+        },
+        {
+          "item_key": "copite_lockpick_moon",
+          "chance": 4e-06
+        },
+        {
+          "item_key": "copite_lockpick_sun",
+          "chance": 2.5e-06
+        }
+      ],
+      "failure_mechanics": {
+        "stun": {
+          "chance": 0.45,
+          "duration_seconds": 8
+        },
+        "damage": {
+          "chance": 0.4,
+          "min": 50,
+          "max": 120
+        }
+      }
+    },
+    {
+      "skill": "thieving",
+      "activity_type": "queued",
+      "key": "citizen",
+      "level": 25,
+      "action": "Wealthy Citizen",
+      "base_time_seconds": 10.0,
+      "xp": 25,
+      "coin_reward": {
+        "min": 25,
+        "max": 60
+      },
+      "success_rate": 0.65,
+      "outputs": [],
+      "loot_drops": [
+        {
+          "item_key": "crimsrite_ore",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.1,
+          "requirements": null
+        },
+        {
+          "item_key": "fluxite_rune",
+          "quantity_min": 2,
+          "quantity_max": 5,
+          "drop_chance": 0.1,
+          "requirements": null
+        },
+        {
+          "item_key": "velorite_arrow",
+          "quantity_min": 5,
+          "quantity_max": 12,
+          "drop_chance": 0.08,
+          "requirements": null
+        },
+        {
+          "item_key": "velorite_bar",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.06,
+          "requirements": null
+        },
+        {
+          "item_key": "spider_silk",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.03,
+          "requirements": null
+        },
+        {
+          "item_key": "frostleaf_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "moonpotato_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "sunpetal_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "enriched_compost",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "emberstem_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.008,
+          "requirements": null
+        },
+        {
+          "item_key": "thieving_gloves",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 3e-05,
+          "requirements": null
+        }
+      ],
+      "rare_drops": [
+        {
+          "item_key": "crimsrite_lockpick_star",
+          "chance": 1e-05
+        },
+        {
+          "item_key": "crimsrite_lockpick_moon",
+          "chance": 4e-06
+        },
+        {
+          "item_key": "crimsrite_lockpick_sun",
+          "chance": 2.5e-06
+        }
+      ],
+      "failure_mechanics": {
+        "stun": {
+          "chance": 0.5,
+          "duration_seconds": 10
+        },
+        "damage": {
+          "chance": 0.45,
+          "min": 80,
+          "max": 180
+        }
+      }
+    },
+    {
+      "skill": "thieving",
+      "activity_type": "queued",
+      "key": "fisherman_hut",
+      "level": 30,
+      "action": "Fisherman's Hut",
+      "base_time_seconds": 11.0,
+      "xp": 30,
+      "coin_reward": {
+        "min": 30,
+        "max": 80
+      },
+      "success_rate": 0.62,
+      "outputs": [],
+      "loot_drops": [
+        {
+          "item_key": "raw_goldstream",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.063,
+          "requirements": {
+            "skill": "fishing",
+            "level": 28
+          }
+        },
+        {
+          "item_key": "raw_thunderfin",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.049,
+          "requirements": {
+            "skill": "fishing",
+            "level": 35
+          }
+        },
+        {
+          "item_key": "raw_stoneback",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0385,
+          "requirements": {
+            "skill": "fishing",
+            "level": 42
+          }
+        },
+        {
+          "item_key": "raw_crimson_carp",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.035,
+          "requirements": {
+            "skill": "fishing",
+            "level": 20
+          }
+        },
+        {
+          "item_key": "raw_ironjaw",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0315,
+          "requirements": {
+            "skill": "fishing",
+            "level": 50
+          }
+        },
+        {
+          "item_key": "raw_riverfin",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.027999999999999997,
+          "requirements": {
+            "skill": "fishing",
+            "level": 12
+          }
+        },
+        {
+          "item_key": "raw_frostgill",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0245,
+          "requirements": {
+            "skill": "fishing",
+            "level": 58
+          }
+        },
+        {
+          "item_key": "raw_shadowfin",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0175,
+          "requirements": {
+            "skill": "fishing",
+            "level": 65
+          }
+        },
+        {
+          "item_key": "raw_abyssal_eel",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.01225,
+          "requirements": {
+            "skill": "fishing",
+            "level": 72
+          }
+        },
+        {
+          "item_key": "raw_emberfin",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.00875,
+          "requirements": {
+            "locked": true,
+            "skill": "fishing",
+            "level": 80
+          }
+        },
+        {
+          "item_key": "raw_voidtooth",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.00525,
+          "requirements": {
+            "locked": true,
+            "skill": "fishing",
+            "level": 95
+          }
+        },
+        {
+          "item_key": "raw_leviathan_scale",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.0028000000000000004,
+          "requirements": {
+            "locked": true,
+            "skill": "fishing",
+            "level": 105
+          }
+        },
+        {
+          "item_key": "raw_lavafin",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.0014000000000000002,
+          "requirements": {
+            "locked": true,
+            "skill": "fishing",
+            "level": 120
+          }
+        },
+        {
+          "item_key": "raw_pyrescale",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.00053,
+          "requirements": {
+            "locked": true,
+            "skill": "fishing",
+            "level": 150
+          }
+        }
+      ],
+      "rare_drops": [],
+      "failure_mechanics": {
+        "stun": {
+          "chance": 0.5,
+          "duration_seconds": 12
+        },
+        "damage": {
+          "chance": 0.45,
+          "min": 90,
+          "max": 200
+        }
+      }
+    },
+    {
+      "skill": "thieving",
+      "activity_type": "queued",
+      "key": "merchant",
+      "level": 40,
+      "action": "Traveling Merchant",
+      "base_time_seconds": 13.0,
+      "xp": 40,
+      "coin_reward": {
+        "min": 50,
+        "max": 100
+      },
+      "success_rate": 0.55,
+      "outputs": [],
+      "loot_drops": [
+        {
+          "item_key": "shalore_ore",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.1,
+          "requirements": null
+        },
+        {
+          "item_key": "crystal_dust",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.08,
+          "requirements": null
+        },
+        {
+          "item_key": "crimsrite_bar",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.06,
+          "requirements": null
+        },
+        {
+          "item_key": "crimsrite_arrow",
+          "quantity_min": 5,
+          "quantity_max": 10,
+          "drop_chance": 0.06,
+          "requirements": null
+        },
+        {
+          "item_key": "prismite_rune",
+          "quantity_min": 2,
+          "quantity_max": 4,
+          "drop_chance": 0.05,
+          "requirements": null
+        },
+        {
+          "item_key": "big_bones",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.04,
+          "requirements": null
+        },
+        {
+          "item_key": "dragon_hide",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "shadowmoss_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "starmelon_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "enriched_compost",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "frostleaf_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.008,
+          "requirements": null
+        },
+        {
+          "item_key": "magical_compost",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.008,
+          "requirements": null
+        },
+        {
+          "item_key": "ashling_sapling",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.005,
+          "requirements": null
+        },
+        {
+          "item_key": "thieving_gloves",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 4e-05,
+          "requirements": null
+        }
+      ],
+      "rare_drops": [
+        {
+          "item_key": "shalore_lockpick_star",
+          "chance": 1e-05
+        },
+        {
+          "item_key": "shalore_lockpick_moon",
+          "chance": 4e-06
+        },
+        {
+          "item_key": "shalore_lockpick_sun",
+          "chance": 2.5e-06
+        }
+      ],
+      "failure_mechanics": {
+        "stun": {
+          "chance": 0.55,
+          "duration_seconds": 12
+        },
+        "damage": {
+          "chance": 0.5,
+          "min": 120,
+          "max": 250
+        }
+      }
+    },
+    {
+      "skill": "thieving",
+      "activity_type": "queued",
+      "key": "lumberyard",
+      "level": 45,
+      "action": "Lumberyard",
+      "base_time_seconds": 13.0,
+      "xp": 42,
+      "coin_reward": {
+        "min": 45,
+        "max": 110
+      },
+      "success_rate": 0.5,
+      "outputs": [],
+      "loot_drops": [
+        {
+          "item_key": "log_ironbark",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0525,
+          "requirements": {
+            "skill": "woodcutting",
+            "level": 15
+          }
+        },
+        {
+          "item_key": "log_frostwood",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0455,
+          "requirements": {
+            "skill": "woodcutting",
+            "level": 22
+          }
+        },
+        {
+          "item_key": "log_emberwood",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.042,
+          "requirements": {
+            "skill": "woodcutting",
+            "level": 30
+          }
+        },
+        {
+          "item_key": "log_moonwood",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.035,
+          "requirements": {
+            "skill": "woodcutting",
+            "level": 40
+          }
+        },
+        {
+          "item_key": "log_spirit",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0245,
+          "requirements": {
+            "skill": "woodcutting",
+            "level": 50
+          }
+        },
+        {
+          "item_key": "log_void",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.01575,
+          "requirements": {
+            "skill": "woodcutting",
+            "level": 65
+          }
+        },
+        {
+          "item_key": "log_elder",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.00875,
+          "requirements": {
+            "locked": true,
+            "skill": "woodcutting",
+            "level": 80
+          }
+        },
+        {
+          "item_key": "log_worldtree",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.0042,
+          "requirements": {
+            "locked": true,
+            "skill": "woodcutting",
+            "level": 95
+          }
+        },
+        {
+          "item_key": "log_scorchwood",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.0017499999999999998,
+          "requirements": {
+            "locked": true,
+            "skill": "woodcutting",
+            "level": 120
+          }
+        },
+        {
+          "item_key": "log_cinderpine",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.0008799999999999999,
+          "requirements": {
+            "locked": true,
+            "skill": "woodcutting",
+            "level": 135
+          }
+        },
+        {
+          "item_key": "log_ashroot",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.00035000000000000005,
+          "requirements": {
+            "locked": true,
+            "skill": "woodcutting",
+            "level": 150
+          }
+        }
+      ],
+      "rare_drops": [],
+      "failure_mechanics": {
+        "stun": {
+          "chance": 0.52,
+          "duration_seconds": 15
+        },
+        "damage": {
+          "chance": 0.45,
+          "min": 110,
+          "max": 260
+        }
+      }
+    },
+    {
+      "skill": "thieving",
+      "activity_type": "queued",
+      "key": "noble",
+      "level": 55,
+      "action": "Noble",
+      "base_time_seconds": 16.0,
+      "xp": 55,
+      "coin_reward": {
+        "min": 100,
+        "max": 200
+      },
+      "success_rate": 0.4,
+      "outputs": [],
+      "loot_drops": [
+        {
+          "item_key": "crystal_dust",
+          "quantity_min": 1,
+          "quantity_max": 3,
+          "drop_chance": 0.12,
+          "requirements": null
+        },
+        {
+          "item_key": "auorite_ore",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.08,
+          "requirements": null
+        },
+        {
+          "item_key": "celestite_rune",
+          "quantity_min": 2,
+          "quantity_max": 4,
+          "drop_chance": 0.06,
+          "requirements": null
+        },
+        {
+          "item_key": "shalore_bar",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.05,
+          "requirements": null
+        },
+        {
+          "item_key": "shalore_arrow",
+          "quantity_min": 5,
+          "quantity_max": 10,
+          "drop_chance": 0.05,
+          "requirements": null
+        },
+        {
+          "item_key": "dragon_bones",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.02,
+          "requirements": null
+        },
+        {
+          "item_key": "spiritbloom_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "voidberry_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "nightshade_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "shadowmoss_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.008,
+          "requirements": null
+        },
+        {
+          "item_key": "magical_compost",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.008,
+          "requirements": null
+        },
+        {
+          "item_key": "ashling_sapling",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.005,
+          "requirements": null
+        },
+        {
+          "item_key": "thieving_gloves",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 5e-05,
+          "requirements": null
+        }
+      ],
+      "rare_drops": [
+        {
+          "item_key": "noctite_lockpick_star",
+          "chance": 1e-05
+        },
+        {
+          "item_key": "noctite_lockpick_moon",
+          "chance": 4e-06
+        },
+        {
+          "item_key": "noctite_lockpick_sun",
+          "chance": 2.5e-06
+        }
+      ],
+      "failure_mechanics": {
+        "stun": {
+          "chance": 0.6,
+          "duration_seconds": 15
+        },
+        "damage": {
+          "chance": 0.55,
+          "min": 150,
+          "max": 300
+        }
+      }
+    },
+    {
+      "skill": "thieving",
+      "activity_type": "queued",
+      "key": "prospectors_camp",
+      "level": 60,
+      "action": "Prospector's Camp",
+      "base_time_seconds": 15.0,
+      "xp": 56,
+      "coin_reward": {
+        "min": 60,
+        "max": 150
+      },
+      "success_rate": 0.38,
+      "outputs": [],
+      "loot_drops": [
+        {
+          "item_key": "crystal_dust",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.05,
+          "requirements": null
+        },
+        {
+          "item_key": "velorite_ore",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.049,
+          "requirements": {
+            "skill": "mining",
+            "level": 15
+          }
+        },
+        {
+          "item_key": "crimsrite_ore",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.042,
+          "requirements": {
+            "skill": "mining",
+            "level": 25
+          }
+        },
+        {
+          "item_key": "shalore_ore",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0385,
+          "requirements": {
+            "skill": "mining",
+            "level": 40
+          }
+        },
+        {
+          "item_key": "noctite_ore",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0315,
+          "requirements": {
+            "skill": "mining",
+            "level": 55
+          }
+        },
+        {
+          "item_key": "auorite_ore",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.021,
+          "requirements": {
+            "skill": "mining",
+            "level": 70
+          }
+        },
+        {
+          "item_key": "vexite_ore",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.013999999999999999,
+          "requirements": {
+            "locked": true,
+            "skill": "mining",
+            "level": 85
+          }
+        },
+        {
+          "item_key": "gold_ore",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0105,
+          "requirements": {
+            "skill": "mining",
+            "level": 1
+          }
+        },
+        {
+          "item_key": "zephyne_ore",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.00875,
+          "requirements": {
+            "locked": true,
+            "skill": "mining",
+            "level": 95
+          }
+        },
+        {
+          "item_key": "korunite_ore",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.0042,
+          "requirements": {
+            "locked": true,
+            "skill": "mining",
+            "level": 110
+          }
+        },
+        {
+          "item_key": "drakonite_ore",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.0021,
+          "requirements": {
+            "locked": true,
+            "skill": "mining",
+            "level": 120
+          }
+        },
+        {
+          "item_key": "pyrethium_ore",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.00105,
+          "requirements": {
+            "locked": true,
+            "skill": "mining",
+            "level": 135
+          }
+        },
+        {
+          "item_key": "infernite_ore",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.00042,
+          "requirements": {
+            "locked": true,
+            "skill": "mining",
+            "level": 150
+          }
+        }
+      ],
+      "rare_drops": [],
+      "failure_mechanics": {
+        "stun": {
+          "chance": 0.54,
+          "duration_seconds": 18
+        },
+        "damage": {
+          "chance": 0.45,
+          "min": 130,
+          "max": 320
+        }
+      }
+    },
+    {
+      "skill": "thieving",
+      "activity_type": "queued",
+      "key": "treasure_chest",
+      "level": 70,
+      "action": "Treasure Chest",
+      "base_time_seconds": 18.0,
+      "xp": 65,
+      "coin_reward": {
+        "min": 100,
+        "max": 250
+      },
+      "success_rate": 0.35,
+      "outputs": [],
+      "loot_drops": [
+        {
+          "item_key": "auorite_bar",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.1,
+          "requirements": null
+        },
+        {
+          "item_key": "shadowrite_rune",
+          "quantity_min": 3,
+          "quantity_max": 6,
+          "drop_chance": 0.1,
+          "requirements": null
+        },
+        {
+          "item_key": "auorite_arrow",
+          "quantity_min": 10,
+          "quantity_max": 20,
+          "drop_chance": 0.08,
+          "requirements": null
+        },
+        {
+          "item_key": "vexite_ore",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.05,
+          "requirements": null
+        },
+        {
+          "item_key": "dragon_hide",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.03,
+          "requirements": null
+        },
+        {
+          "item_key": "spiritbloom_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "voidberry_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "voidpetal_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.008,
+          "requirements": null
+        },
+        {
+          "item_key": "magical_compost",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.008,
+          "requirements": null
+        },
+        {
+          "item_key": "duskwood_sapling",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.005,
+          "requirements": null
+        },
+        {
+          "item_key": "spirit_bow",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.003,
+          "requirements": null
+        },
+        {
+          "item_key": "thieving_gloves",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 6e-05,
+          "requirements": null
+        }
+      ],
+      "rare_drops": [
+        {
+          "item_key": "auorite_lockpick_star",
+          "chance": 1e-05
+        },
+        {
+          "item_key": "auorite_lockpick_moon",
+          "chance": 4e-06
+        },
+        {
+          "item_key": "auorite_lockpick_sun",
+          "chance": 2.5e-06
+        }
+      ],
+      "failure_mechanics": {
+        "stun": {
+          "chance": 0.65,
+          "duration_seconds": 20
+        },
+        "damage": {
+          "chance": 0.65,
+          "min": 200,
+          "max": 400
+        }
+      }
+    },
+    {
+      "skill": "thieving",
+      "activity_type": "queued",
+      "key": "herbalists_stall",
+      "level": 75,
+      "action": "Herbalist's Stall",
+      "base_time_seconds": 17.0,
+      "xp": 72,
+      "coin_reward": {
+        "min": 80,
+        "max": 200
+      },
+      "success_rate": 0.33,
+      "outputs": [],
+      "loot_drops": [
+        {
+          "item_key": "glowroot",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.049,
+          "requirements": {
+            "skill": "farming",
+            "level": 1
+          }
+        },
+        {
+          "item_key": "emberstem",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.042,
+          "requirements": {
+            "skill": "farming",
+            "level": 10
+          }
+        },
+        {
+          "item_key": "frostleaf",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.035,
+          "requirements": {
+            "skill": "farming",
+            "level": 20
+          }
+        },
+        {
+          "item_key": "shadowmoss",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.027999999999999997,
+          "requirements": {
+            "skill": "farming",
+            "level": 32
+          }
+        },
+        {
+          "item_key": "spiritbloom",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.02275,
+          "requirements": {
+            "skill": "farming",
+            "level": 45
+          }
+        },
+        {
+          "item_key": "voidpetal",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0175,
+          "requirements": {
+            "skill": "farming",
+            "level": 60
+          }
+        },
+        {
+          "item_key": "glowroot_seed",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0175,
+          "requirements": {
+            "skill": "farming",
+            "level": 1
+          }
+        },
+        {
+          "item_key": "thieving_potion",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.015,
+          "requirements": null
+        },
+        {
+          "item_key": "celestine_herb",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.013999999999999999,
+          "requirements": {
+            "locked": true,
+            "skill": "farming",
+            "level": 75
+          }
+        },
+        {
+          "item_key": "emberstem_seed",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.013999999999999999,
+          "requirements": {
+            "skill": "farming",
+            "level": 10
+          }
+        },
+        {
+          "item_key": "elderbloom",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0105,
+          "requirements": {
+            "locked": true,
+            "skill": "farming",
+            "level": 90
+          }
+        },
+        {
+          "item_key": "frostleaf_seed",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0105,
+          "requirements": {
+            "skill": "farming",
+            "level": 20
+          }
+        },
+        {
+          "item_key": "shadowmoss_seed",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.00875,
+          "requirements": {
+            "skill": "farming",
+            "level": 32
+          }
+        },
+        {
+          "item_key": "spiritbloom_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.006999999999999999,
+          "requirements": {
+            "skill": "farming",
+            "level": 45
+          }
+        },
+        {
+          "item_key": "drakeflower",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.00525,
+          "requirements": {
+            "locked": true,
+            "skill": "farming",
+            "level": 120
+          }
+        },
+        {
+          "item_key": "voidpetal_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.00525,
+          "requirements": {
+            "skill": "farming",
+            "level": 60
+          }
+        },
+        {
+          "item_key": "super_thieving_potion",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.005,
+          "requirements": null
+        },
+        {
+          "item_key": "celestine_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.0042,
+          "requirements": {
+            "locked": true,
+            "skill": "farming",
+            "level": 75
+          }
+        },
+        {
+          "item_key": "elderbloom_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.00315,
+          "requirements": {
+            "locked": true,
+            "skill": "farming",
+            "level": 90
+          }
+        },
+        {
+          "item_key": "cinderbloom",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.0028000000000000004,
+          "requirements": {
+            "locked": true,
+            "skill": "farming",
+            "level": 135
+          }
+        },
+        {
+          "item_key": "drakeflower_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.0017499999999999998,
+          "requirements": {
+            "locked": true,
+            "skill": "farming",
+            "level": 120
+          }
+        },
+        {
+          "item_key": "infernroot",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.0014000000000000002,
+          "requirements": {
+            "locked": true,
+            "skill": "farming",
+            "level": 150
+          }
+        },
+        {
+          "item_key": "cinderbloom_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.00105,
+          "requirements": {
+            "locked": true,
+            "skill": "farming",
+            "level": 135
+          }
+        },
+        {
+          "item_key": "infernroot_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.00053,
+          "requirements": {
+            "locked": true,
+            "skill": "farming",
+            "level": 150
+          }
+        }
+      ],
+      "rare_drops": [],
+      "failure_mechanics": {
+        "stun": {
+          "chance": 0.55,
+          "duration_seconds": 22
+        },
+        "damage": {
+          "chance": 0.44,
+          "min": 150,
+          "max": 400
+        }
+      }
+    },
+    {
+      "skill": "thieving",
+      "activity_type": "queued",
+      "key": "royal_guard",
+      "level": 85,
+      "action": "Royal Guard",
+      "base_time_seconds": 21.0,
+      "xp": 80,
+      "coin_reward": {
+        "min": 150,
+        "max": 300
+      },
+      "success_rate": 0.3,
+      "outputs": [],
+      "loot_drops": [
+        {
+          "item_key": "crystal_dust",
+          "quantity_min": 2,
+          "quantity_max": 4,
+          "drop_chance": 0.15,
+          "requirements": null
+        },
+        {
+          "item_key": "vexite_bar",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.08,
+          "requirements": null
+        },
+        {
+          "item_key": "vexite_arrow",
+          "quantity_min": 10,
+          "quantity_max": 20,
+          "drop_chance": 0.06,
+          "requirements": null
+        },
+        {
+          "item_key": "shadowrite_rune",
+          "quantity_min": 2,
+          "quantity_max": 4,
+          "drop_chance": 0.05,
+          "requirements": null
+        },
+        {
+          "item_key": "zephyne_ore",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.04,
+          "requirements": null
+        },
+        {
+          "item_key": "void_essence",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.02,
+          "requirements": null
+        },
+        {
+          "item_key": "voidpetal_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "celestine_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.008,
+          "requirements": null
+        },
+        {
+          "item_key": "crystalbark_sapling",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.005,
+          "requirements": null
+        },
+        {
+          "item_key": "thieving_gloves",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.003,
+          "requirements": null
+        },
+        {
+          "item_key": "elder_bow",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.002,
+          "requirements": null
+        }
+      ],
+      "rare_drops": [
+        {
+          "item_key": "vexite_lockpick_star",
+          "chance": 1e-05
+        },
+        {
+          "item_key": "vexite_lockpick_moon",
+          "chance": 4e-06
+        },
+        {
+          "item_key": "vexite_lockpick_sun",
+          "chance": 2.5e-06
+        }
+      ],
+      "failure_mechanics": {
+        "stun": {
+          "chance": 0.7,
+          "duration_seconds": 25
+        },
+        "damage": {
+          "chance": 0.7,
+          "min": 250,
+          "max": 500
+        }
+      }
+    },
+    {
+      "skill": "thieving",
+      "activity_type": "queued",
+      "key": "vault",
+      "level": 95,
+      "action": "Bank Vault",
+      "base_time_seconds": 25.0,
+      "xp": 100,
+      "coin_reward": {
+        "min": 200,
+        "max": 350
+      },
+      "success_rate": 0.2,
+      "outputs": [],
+      "loot_drops": [
+        {
+          "item_key": "crystal_dust",
+          "quantity_min": 3,
+          "quantity_max": 6,
+          "drop_chance": 0.2,
+          "requirements": null
+        },
+        {
+          "item_key": "zephyne_bar",
+          "quantity_min": 1,
+          "quantity_max": 3,
+          "drop_chance": 0.1,
+          "requirements": null
+        },
+        {
+          "item_key": "nexus_rune",
+          "quantity_min": 3,
+          "quantity_max": 8,
+          "drop_chance": 0.1,
+          "requirements": null
+        },
+        {
+          "item_key": "zephyne_arrow",
+          "quantity_min": 15,
+          "quantity_max": 30,
+          "drop_chance": 0.08,
+          "requirements": null
+        },
+        {
+          "item_key": "nether_rune",
+          "quantity_min": 2,
+          "quantity_max": 4,
+          "drop_chance": 0.08,
+          "requirements": null
+        },
+        {
+          "item_key": "korunite_bar",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.05,
+          "requirements": null
+        },
+        {
+          "item_key": "void_essence",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.05,
+          "requirements": null
+        },
+        {
+          "item_key": "korunite_arrow",
+          "quantity_min": 10,
+          "quantity_max": 25,
+          "drop_chance": 0.03,
+          "requirements": null
+        },
+        {
+          "item_key": "celestine_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "elderbloom_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.008,
+          "requirements": null
+        },
+        {
+          "item_key": "spiritoak_sapling",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.005,
+          "requirements": null
+        },
+        {
+          "item_key": "worldtree_sapling",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.004,
+          "requirements": null
+        },
+        {
+          "item_key": "thieving_gloves",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.0034999999999999996,
+          "requirements": null
+        },
+        {
+          "item_key": "void_bow",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.0015,
+          "requirements": null
+        },
+        {
+          "item_key": "worldtree_bow",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.001,
+          "requirements": null
+        }
+      ],
+      "rare_drops": [
+        {
+          "item_key": "zephyne_lockpick_star",
+          "chance": 1e-05
+        },
+        {
+          "item_key": "zephyne_lockpick_moon",
+          "chance": 4e-06
+        },
+        {
+          "item_key": "zephyne_lockpick_sun",
+          "chance": 2.5e-06
+        }
+      ],
+      "failure_mechanics": {
+        "stun": {
+          "chance": 0.75,
+          "duration_seconds": 30
+        },
+        "damage": {
+          "chance": 0.75,
+          "min": 350,
+          "max": 700
+        }
+      }
+    },
+    {
+      "skill": "thieving",
+      "activity_type": "queued",
+      "key": "runescribes_satchel",
+      "level": 100,
+      "action": "Runescribe's Satchel",
+      "base_time_seconds": 21.0,
+      "xp": 100,
+      "coin_reward": {
+        "min": 130,
+        "max": 300
+      },
+      "success_rate": 0.18,
+      "outputs": [],
+      "loot_drops": [
+        {
+          "item_key": "crystal_dust",
+          "quantity_min": 1,
+          "quantity_max": 3,
+          "drop_chance": 0.1,
+          "requirements": null
+        },
+        {
+          "item_key": "aetherite_rune",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.055999999999999994,
+          "requirements": {
+            "skill": "arcana",
+            "level": 1
+          }
+        },
+        {
+          "item_key": "voidstone_rune",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0455,
+          "requirements": {
+            "skill": "arcana",
+            "level": 10
+          }
+        },
+        {
+          "item_key": "void_essence",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.04,
+          "requirements": {
+            "locked": true,
+            "skill": "mining",
+            "level": 120
+          }
+        },
+        {
+          "item_key": "fluxite_rune",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0385,
+          "requirements": {
+            "skill": "arcana",
+            "level": 25
+          }
+        },
+        {
+          "item_key": "prismite_rune",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0315,
+          "requirements": {
+            "skill": "arcana",
+            "level": 40
+          }
+        },
+        {
+          "item_key": "celestite_rune",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0245,
+          "requirements": {
+            "skill": "arcana",
+            "level": 55
+          }
+        },
+        {
+          "item_key": "shadowrite_rune",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.01925,
+          "requirements": {
+            "locked": true,
+            "skill": "arcana",
+            "level": 70
+          }
+        },
+        {
+          "item_key": "nexus_rune",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.013999999999999999,
+          "requirements": {
+            "locked": true,
+            "skill": "arcana",
+            "level": 90
+          }
+        },
+        {
+          "item_key": "nether_rune",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.0105,
+          "requirements": {
+            "locked": true,
+            "skill": "arcana",
+            "level": 105
+          }
+        },
+        {
+          "item_key": "drakonite_rune",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.006999999999999999,
+          "requirements": {
+            "locked": true,
+            "skill": "arcana",
+            "level": 120
+          }
+        },
+        {
+          "item_key": "pyrethium_rune",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.0042,
+          "requirements": {
+            "locked": true,
+            "skill": "arcana",
+            "level": 135
+          }
+        },
+        {
+          "item_key": "infernite_rune",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.0021,
+          "requirements": {
+            "locked": true,
+            "skill": "arcana",
+            "level": 150
+          }
+        }
+      ],
+      "rare_drops": [],
+      "failure_mechanics": {
+        "stun": {
+          "chance": 0.56,
+          "duration_seconds": 28
+        },
+        "damage": {
+          "chance": 0.42,
+          "min": 180,
+          "max": 550
+        }
+      }
+    },
+    {
+      "skill": "thieving",
+      "activity_type": "queued",
+      "key": "drake_hoard",
+      "level": 120,
+      "action": "Drake Hoard",
+      "base_time_seconds": 28.0,
+      "xp": 140,
+      "coin_reward": {
+        "min": 300,
+        "max": 550
+      },
+      "success_rate": 0.28,
+      "outputs": [],
+      "loot_drops": [
+        {
+          "item_key": "drakonite_ore",
+          "quantity_min": 3,
+          "quantity_max": 8,
+          "drop_chance": 0.15,
+          "requirements": null
+        },
+        {
+          "item_key": "drakonite_bar",
+          "quantity_min": 1,
+          "quantity_max": 3,
+          "drop_chance": 0.12,
+          "requirements": null
+        },
+        {
+          "item_key": "drakonite_rune",
+          "quantity_min": 2,
+          "quantity_max": 5,
+          "drop_chance": 0.12,
+          "requirements": null
+        },
+        {
+          "item_key": "nether_rune",
+          "quantity_min": 2,
+          "quantity_max": 5,
+          "drop_chance": 0.1,
+          "requirements": null
+        },
+        {
+          "item_key": "drakonite_arrow",
+          "quantity_min": 15,
+          "quantity_max": 30,
+          "drop_chance": 0.1,
+          "requirements": null
+        },
+        {
+          "item_key": "sacred_ashes",
+          "quantity_min": 2,
+          "quantity_max": 5,
+          "drop_chance": 0.1,
+          "requirements": null
+        },
+        {
+          "item_key": "nexus_rune",
+          "quantity_min": 2,
+          "quantity_max": 5,
+          "drop_chance": 0.08,
+          "requirements": null
+        },
+        {
+          "item_key": "dragon_hide",
+          "quantity_min": 1,
+          "quantity_max": 2,
+          "drop_chance": 0.06,
+          "requirements": null
+        },
+        {
+          "item_key": "drakeflower_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "drakewheat_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "scorchwood_sapling",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.005,
+          "requirements": null
+        },
+        {
+          "item_key": "drakonite_sword",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.005,
+          "requirements": null
+        }
+      ],
+      "rare_drops": [
+        {
+          "item_key": "drakonite_lockpick_star",
+          "chance": 1e-05
+        },
+        {
+          "item_key": "drakonite_lockpick_moon",
+          "chance": 4e-06
+        },
+        {
+          "item_key": "drakonite_lockpick_sun",
+          "chance": 2.5e-06
+        }
+      ],
+      "failure_mechanics": {
+        "stun": {
+          "chance": 0.55,
+          "duration_seconds": 35
+        },
+        "damage": {
+          "chance": 0.25,
+          "min": 200,
+          "max": 800
+        }
+      }
+    },
+    {
+      "skill": "thieving",
+      "activity_type": "queued",
+      "key": "ember_vault",
+      "level": 135,
+      "action": "Ember Vault",
+      "base_time_seconds": 31.0,
+      "xp": 185,
+      "coin_reward": {
+        "min": 400,
+        "max": 700
+      },
+      "success_rate": 0.24,
+      "outputs": [],
+      "loot_drops": [
+        {
+          "item_key": "pyrethium_ore",
+          "quantity_min": 3,
+          "quantity_max": 8,
+          "drop_chance": 0.15,
+          "requirements": null
+        },
+        {
+          "item_key": "pyrethium_bar",
+          "quantity_min": 1,
+          "quantity_max": 3,
+          "drop_chance": 0.12,
+          "requirements": null
+        },
+        {
+          "item_key": "pyrethium_rune",
+          "quantity_min": 2,
+          "quantity_max": 5,
+          "drop_chance": 0.12,
+          "requirements": null
+        },
+        {
+          "item_key": "pyrethium_arrow",
+          "quantity_min": 15,
+          "quantity_max": 30,
+          "drop_chance": 0.1,
+          "requirements": null
+        },
+        {
+          "item_key": "sacred_ashes",
+          "quantity_min": 3,
+          "quantity_max": 6,
+          "drop_chance": 0.1,
+          "requirements": null
+        },
+        {
+          "item_key": "nexus_rune",
+          "quantity_min": 3,
+          "quantity_max": 6,
+          "drop_chance": 0.08,
+          "requirements": null
+        },
+        {
+          "item_key": "dragon_hide",
+          "quantity_min": 1,
+          "quantity_max": 3,
+          "drop_chance": 0.07,
+          "requirements": null
+        },
+        {
+          "item_key": "cinderbloom_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "cindergourd_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "cinderpine_sapling",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.005,
+          "requirements": null
+        },
+        {
+          "item_key": "pyrethium_longsword",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.005,
+          "requirements": null
+        },
+        {
+          "item_key": "scorchwood_sapling",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.004,
+          "requirements": null
+        }
+      ],
+      "rare_drops": [
+        {
+          "item_key": "pyrethium_lockpick_star",
+          "chance": 1e-05
+        },
+        {
+          "item_key": "pyrethium_lockpick_moon",
+          "chance": 4e-06
+        },
+        {
+          "item_key": "pyrethium_lockpick_sun",
+          "chance": 2.5e-06
+        }
+      ],
+      "failure_mechanics": {
+        "stun": {
+          "chance": 0.6,
+          "duration_seconds": 40
+        },
+        "damage": {
+          "chance": 0.28,
+          "min": 250,
+          "max": 950
+        }
+      }
+    },
+    {
+      "skill": "thieving",
+      "activity_type": "queued",
+      "key": "infernal_treasury",
+      "level": 150,
+      "action": "Infernal Treasury",
+      "base_time_seconds": 35.0,
+      "xp": 240,
+      "coin_reward": {
+        "min": 550,
+        "max": 900
+      },
+      "success_rate": 0.2,
+      "outputs": [],
+      "loot_drops": [
+        {
+          "item_key": "infernite_ore",
+          "quantity_min": 4,
+          "quantity_max": 10,
+          "drop_chance": 0.15,
+          "requirements": null
+        },
+        {
+          "item_key": "infernite_bar",
+          "quantity_min": 2,
+          "quantity_max": 4,
+          "drop_chance": 0.12,
+          "requirements": null
+        },
+        {
+          "item_key": "infernite_rune",
+          "quantity_min": 2,
+          "quantity_max": 6,
+          "drop_chance": 0.12,
+          "requirements": null
+        },
+        {
+          "item_key": "infernite_arrow",
+          "quantity_min": 15,
+          "quantity_max": 40,
+          "drop_chance": 0.1,
+          "requirements": null
+        },
+        {
+          "item_key": "sacred_ashes",
+          "quantity_min": 4,
+          "quantity_max": 8,
+          "drop_chance": 0.1,
+          "requirements": null
+        },
+        {
+          "item_key": "nexus_rune",
+          "quantity_min": 3,
+          "quantity_max": 8,
+          "drop_chance": 0.08,
+          "requirements": null
+        },
+        {
+          "item_key": "dragon_hide",
+          "quantity_min": 2,
+          "quantity_max": 4,
+          "drop_chance": 0.08,
+          "requirements": null
+        },
+        {
+          "item_key": "infernroot_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "infernmelon_seed",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.01,
+          "requirements": null
+        },
+        {
+          "item_key": "ashroot_sapling",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.005,
+          "requirements": null
+        },
+        {
+          "item_key": "infernite_chestplate",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.005,
+          "requirements": null
+        },
+        {
+          "item_key": "cinderpine_sapling",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.004,
+          "requirements": null
+        },
+        {
+          "item_key": "infernite_staff",
+          "quantity_min": 1,
+          "quantity_max": 1,
+          "drop_chance": 0.003,
+          "requirements": null
+        }
+      ],
+      "rare_drops": [
+        {
+          "item_key": "infernite_lockpick_star",
+          "chance": 1e-05
+        },
+        {
+          "item_key": "infernite_lockpick_moon",
+          "chance": 4e-06
+        },
+        {
+          "item_key": "infernite_lockpick_sun",
+          "chance": 2.5e-06
+        }
+      ],
+      "failure_mechanics": {
+        "stun": {
+          "chance": 0.65,
+          "duration_seconds": 45
+        },
+        "damage": {
+          "chance": 0.3,
+          "min": 300,
+          "max": 1100
+        }
+      }
+    }
+  ]
+}

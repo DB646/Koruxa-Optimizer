@@ -1,0 +1,49 @@
+# Python environments and generated caches
+.venv/
+.venv-*/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tmp/
+
+# Local player/account snapshots and refreshed game data
+/player.json
+/inventory.json
+/bank.json
+/mastery.json
+/queue.json
+/skill_*.json
+/market_data.json
+/market_categories.json
+/output/
+
+# Local browser/game captures, diagnostics, and account-specific helpers
+/game.js
+/optimizer v1.py
+/activity_audit.py
+/get_skill_data.py
+/extract_endpoints.py
+/api_usage.txt
+/after_character.html
+/characters.html
+/buy_orders_search.txt
+/endpoints.txt
+/game_js_output.txt
+/inspect_home_output.txt
+/market_search.txt
+/thieving-analysis.txt
+/test_*.py
+/inspect_*.py
+/theiving_inspector.py
+/scripts/*diagnostic.py
+/scripts/inspect_*.py
+/scripts/analyze_*.py
+/scripts/audit_*.py
+/data/wiki/*errors.json
+/data/wiki/test_*.json
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
