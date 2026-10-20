@@ -2,7 +2,7 @@
 
 ## Share with clanmates
 
-The project is designed to run locally for each player. Share the source on GitHub, then clanmates can clone it, create their own Python environment, install `requirements.txt`, and run `start_optimizer.bat`. Each person enters their own Koruxa login and character ID; this project does not host or share account sessions.
+The project is designed to run locally for each player. Share the source on GitHub, then clanmates can clone it, create their own Python environment, install `requirements.txt`, and run `start_optimizer.bat`. Each person enters their own Koruxa login and loads their characters from the game's character-selection page; they do not need to look up or type character IDs. This project does not host or share account sessions.
 
 The repository ignore rules exclude local player, inventory, bank, mastery, market, skill, and generated report data, along with browser captures and virtual environments. Keep those files private. Before pushing changes, check `git status` and confirm that no account snapshots, credentials, or generated reports are staged.
 
@@ -17,7 +17,7 @@ python -m venv .venv
 
 ## Run from the browser
 
-Double-click `start_optimizer.bat`. It starts a local-only service and opens the optimizer dashboard in your browser. Enter your Koruxa login and character ID, then select **Run optimizer**. Enable **Refresh market data** when you want to update inventory, bank, and market listings before ranking tasks. The dashboard shows run progress and loads the resulting report automatically. Keep the console window open until you are finished; Ctrl+C stops the local service.
+Double-click `start_optimizer.bat`. It starts a local-only service and opens the optimizer dashboard in your browser. Enter your Koruxa username and password, select **Load characters**, choose the desired character by name, and select **Run optimizer**. The local service reads the IDs from the authenticated character-selection page; they are hidden in the game's normal UI, so you do not need to look them up. Enable **Refresh market data** when you want to update inventory, bank, and market listings before ranking tasks. The dashboard shows run progress and loads the resulting report automatically. Keep the console window open until you are finished; Ctrl+C stops the local service.
 
 The browser sends login details to the local service, which passes them to the optimizer over a pipe. They are not written to the report or saved to disk. The service listens only on this computer (`127.0.0.1`) and is not a hosted or clan-shared server. Clanmates can use the same project code by setting up their own copy and entering their own account details. Do not share your local `player.json`, `bank.json`, `inventory.json`, market snapshot, or generated reports if you want to keep account data private.
 

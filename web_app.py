@@ -10,6 +10,8 @@ from urllib.parse import urlsplit
 import subprocess
 import sys
 import os
+import requests
+from bs4 import BeautifulSoup
 
 
 ROOT = Path(__file__).resolve().parent
@@ -19,6 +21,7 @@ REPORT = ROOT / "output" / "optimizer-results.json"
 HOST = "127.0.0.1"
 PORT = 8765
 MAX_BODY = 16_384
+GAME_BASE_URL = "https://koruxa.com"
 JOB_LOCK = threading.Lock()
 JOB = {"running": False, "state": "idle", "output": "", "returncode": None,
        "started_at": None, "finished_at": None}
@@ -26,6 +29,40 @@ JOB = {"running": False, "state": "idle", "output": "", "returncode": None,
 
 def json_bytes(value):
     return json.dumps(value, ensure_ascii=False).encode("utf-8")
+
+
+def fetch_characters(username, password):
+    """Read the signed-in account's character choices from the game page."""
+    game_session = requests.Session()
+    game_session.get(f"{GAME_BASE_URL}/login", timeout=30)
+    login_response = game_session.post(
+        f"{GAME_BASE_URL}/login",
+        data={"username": username, "password": password},
+        allow_redirects=False,
+        timeout=30,
+    )
+    if login_response.status_code not in (302, 303):
+        raise ValueError("Koruxa login failed. Check your username and password.")
+
+    page = game_session.get(f"{GAME_BASE_URL}/characters", timeout=30)
+    if page.status_code != 200:
+        raise ValueError("Could not load the character selection page from Koruxa.")
+    soup = BeautifulSoup(page.text, "html.parser")
+    characters = []
+    seen_ids = set()
+    for form in soup.select('form[action="/characters/select"]'):
+        field = form.find("input", attrs={"name": "character_id"})
+        character_id = str(field.get("value") or "").strip() if field else ""
+        if not character_id.isdigit() or character_id in seen_ids:
+            continue
+        card = form.find_parent(class_="char-card")
+        heading = card.find(["h2", "h3"]) if card else None
+        name = heading.get_text(" ", strip=True) if heading else f"Character {len(characters) + 1}"
+        characters.append({"id": character_id, "name": name})
+        seen_ids.add(character_id)
+    if not characters:
+        raise ValueError("No characters were found on your Koruxa account.")
+    return characters
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -78,7 +115,8 @@ class Handler(BaseHTTPRequestHandler):
         origin = self.headers.get("Origin")
         if origin and origin not in (f"http://127.0.0.1:{PORT}", f"http://localhost:{PORT}"):
             return self._send_json(403, {"error": "Cross-origin requests are not allowed."})
-        if urlsplit(self.path).path != "/api/run":
+        path = urlsplit(self.path).path
+        if path not in {"/api/run", "/api/characters"}:
             return self._send_json(404, {"error": "Not found."})
         if self.headers.get_content_type() != "application/json":
             return self._send_json(415, {"error": "Send the run options as JSON."})
@@ -93,10 +131,19 @@ class Handler(BaseHTTPRequestHandler):
         username = str(payload.get("username", "")).strip()
         password = str(payload.get("password", ""))
         character_id = str(payload.get("character_id", "")).strip()
-        if not username or not password or not character_id.isdigit():
-            return self._send_json(400, {"error": "Enter your Koruxa username, password, and numeric character ID."})
+        if not username or not password or (path == "/api/run" and not character_id.isdigit()):
+            return self._send_json(400, {"error": "Enter your Koruxa username and password, then choose a character."})
         if len(username) > 200 or len(password) > 1024 or len(character_id) > 20:
             return self._send_json(400, {"error": "One or more login fields are too long."})
+
+        if path == "/api/characters":
+            try:
+                characters = fetch_characters(username, password)
+            except ValueError as exc:
+                return self._send_json(401, {"error": str(exc)})
+            except requests.RequestException:
+                return self._send_json(502, {"error": "Could not reach Koruxa. Try again in a moment."})
+            return self._send_json(200, {"characters": characters})
 
         with JOB_LOCK:
             if JOB["running"]:

@@ -56,7 +56,7 @@
     .run-heading strong { display:block; font-size:16px; margin-bottom:3px; }
     .run-form { display:grid; grid-template-columns:repeat(4,minmax(150px,1fr)); gap:10px; align-items:end; }
     .run-form label { display:block; font-size:12px; color:var(--muted); }
-    .run-form input:not([type=checkbox]) { width:100%; margin-top:5px; }
+    .run-form input:not([type=checkbox]),.run-form select { width:100%; margin-top:5px; }
     .run-actions { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
     .refresh-option { display:flex!important; align-items:center; gap:7px; }
     .run-status { margin-top:12px; color:var(--muted); font-size:13px; white-space:pre-wrap; }
@@ -90,9 +90,10 @@
     <form id="run-form" class="run-form">
       <label>Koruxa username<input id="koruxa-username" name="username" autocomplete="username" required></label>
       <label>Koruxa password<input id="koruxa-password" name="password" type="password" autocomplete="current-password" required></label>
-      <label>Character ID<input id="character-id" name="character_id" inputmode="numeric" placeholder="Enter your character ID" required></label>
+      <label>Character<select id="character-id" name="character_id" required disabled><option value="">Load your characters first</option></select></label>
       <div class="run-actions">
-        <button id="run-button" type="submit">Run optimizer</button>
+        <button id="load-characters-button" type="button">Load characters</button>
+        <button id="run-button" type="submit" disabled>Run optimizer</button>
         <label class="refresh-option"><input id="refresh-market" type="checkbox"> Refresh market data</label>
       </div>
     </form>
@@ -170,6 +171,32 @@
       byId("status").textContent = `Could not load report: ${error.message}`;
     }
   });
+  byId("load-characters-button").addEventListener("click", async () => {
+    const button=byId("load-characters-button"), status=byId("run-status");
+    const username=byId("koruxa-username").value.trim(), password=byId("koruxa-password").value;
+    if(!username||!password) { status.textContent="Enter your Koruxa username and password first."; return; }
+    button.disabled=true;
+    byId("run-button").disabled=true;
+    status.textContent="Signing in and loading your characters…";
+    try {
+      const response=await fetch("/api/characters",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username,password})});
+      const result=await response.json();
+      if(!response.ok) throw new Error(result.error||`Request failed (${response.status})`);
+      const select=byId("character-id");
+      select.innerHTML=`<option value="">Choose a character</option>`+result.characters.map(character=>`<option value="${safe(character.id)}">${safe(character.name)}</option>`).join("");
+      select.disabled=false;
+      if(result.characters.length===1) select.selectedIndex=1;
+      byId("run-button").disabled=!select.value;
+      status.textContent=`Loaded ${result.characters.length} character${result.characters.length===1?"":"s"}. Choose one, then run the optimizer.`;
+    } catch(error) {
+      byId("character-id").disabled=true;
+      byId("character-id").innerHTML=`<option value="">Load your characters first</option>`;
+      status.textContent=`Could not load characters: ${error.message}`;
+    } finally {
+      button.disabled=false;
+    }
+  });
+  byId("character-id").addEventListener("change", () => { byId("run-button").disabled=!byId("character-id").value; });
   byId("run-form").addEventListener("submit", async event => {
     event.preventDefault();
     const button=byId("run-button"), status=byId("run-status");
@@ -188,7 +215,7 @@
       pollRun();
     } catch(error) {
       byId("koruxa-password").value="";
-      button.disabled=false;
+      button.disabled=!byId("character-id").value;
       status.textContent=`Could not start: ${error.message}. Launch start_optimizer.bat and use the dashboard it opens.`;
     }
   });
